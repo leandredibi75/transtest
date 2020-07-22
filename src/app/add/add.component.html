@@ -1,0 +1,62 @@
+<div class="col-12" [formGroup]="addForm">
+	<div class="form-group">
+        
+        <table id="e5"class="table"> <!--ajouter des pieces jointes pas d'input-->
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name of the document(s) (be as specific as possible)</th>
+            </tr>
+            </thead>
+            <tbody ng-app>
+              <tr *ngFor="let row of addForm.get('rows')?.controls;let index = i;" class="col-12">
+                <h5>{{count}} </h5>
+                <td>
+                  Name : <input [formControl]="row.get('NameC')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  Email : <input [formControl]="row.get('EmailC')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  Business job : <input [formControl]="row.get('BusinessjobC')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  Business Agency : <input [formControl]="row.get('BusinessAgencyC')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  Adresse : <input [formControl]="row.get('AdresseC')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  Adresse 2 : <input [formControl]="row.get('Adresse2C')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  City : <input [formControl]="row.get('CityC')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  Country :  <input [formControl]="row.get('CountryC')" class="form-control" placeholder="Document ">
+                </td>
+
+                <td>
+                  Telephone : <input [formControl]="row.get('TelephoneC')" class="form-control" placeholder="Document ">
+                </td>
+              
+                <td>
+                  <button (click)="onRemoveRow(index)">Remove</button>
+                </td>
+              </tr> 
+            </tbody>
+         
+            <button (click)="onAddRow()" *ngIf="addForm.get('rows')" ng-click="count = count + 1" ng-init="count=1">add row</button>
+        </table>
+
+	</div>
+</div>
+
+<pre>{{rows.value | json}}</pre>

@@ -1,0 +1,4 @@
+button, input, td {
+    overflow: visible;
+    display: block;
+}

@@ -1,0 +1,108 @@
+<br>
+<div class="card mx-5">
+  <h5 class="card-header">Formulaire</h5>
+  <div class="card-body">
+      <form [formGroup]="registerForm"(ngSubmit)="onSubmit()"> <!--  -->
+        <div class="form-row">
+          <!--Nom-->
+          <div class="form-group col-6">
+            <label>Nom</label>
+            <input required minlength="3" formControlName="Nom" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Nom.errors }" />
+
+            <!--Erreurs-->
+            <div *ngIf="submitted && f.Nom.errors" class="invalid-feedback">
+              <div *ngIf="f.Nom.errors.required">Le nom est requis</div>
+              <div *ngIf="f.Nom.errors.minlength">Le nom doit contenir {{f.Nom.errors.minlength.requiredLength}} caractères minimun </div>
+            </div>
+          </div>
+
+          <!--Prenom-->
+          <div class="form-group col-6">
+            <label>Prenom</label>
+            <input required minlength="3" formControlName="Prenom" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Prenom.errors }" />
+
+            <!--Erreurs-->
+            <div *ngIf="submitted && f.Prenom.errors" class="invalid-feedback">
+              <div *ngIf="f.Prenom.errors.required">Le prénom est requis</div>
+              <div *ngIf="f.Prenom.errors.minlength">Le prénom doit contenir {{f.Prenom.errors.minlength.requiredLength}} caractères minimun </div>
+            </div>
+          </div>
+          
+          <!--Email-->
+          <div class="form-group col-12">
+            <label>Email</label>
+            <input required minlength="10" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="Email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Email.errors }" />
+
+            <!--Erreurs-->
+            <div *ngIf="submitted && f.Email.errors" class="invalid-feedback">
+              <div *ngIf="f.Email.errors.required">L'email est requis</div>
+              <div *ngIf="f.Email.errors.minlength">L'email doit contenir {{f.Email.errors.minlength.requiredLength}} caractères minimun </div>
+              <div *ngIf="f.Email.errors.pattern">L'email ne correspond pas au modèle</div>
+            </div>
+          </div>
+          
+          <!--Password-->
+          <div class="form-group col-6">
+            <label>Mot de passe</label>
+            <input for type="password" required minlength="6" formControlName="Password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }" />
+
+            <!--Erreurs-->
+            <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+              <div *ngIf="f.Password.errors.required">Le mot de passe est requis</div>
+              <div *ngIf="f.Password.errors.minlength">Le mot de passe doit contenir {{f.Password.errors.minlength.requiredLength}} caractères minimun </div>
+            </div>
+          </div>
+
+          <!--Confirm Password-->
+          <div class="form-group col-6">
+            <label>Confirmer le mot de passe </label>
+            <input for type="password" required minlength="6" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+
+            <!--Erreurs-->
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+              <div *ngIf="f.confirmPassword.errors.required">Le mot de passe est requis</div>
+              <div *ngIf="f.confirmPassword.errors.minlength">Le mot de passe doit contenir {{f.confirmPassword.errors.minlength.requiredLength}} caractères minimun </div>
+            </div>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="submitForm()" novalidate>
+
+            <div *ngFor="let data of Data; let i=index">
+              <label>
+                <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+                {{data.name}}
+              </label>
+            </div>
+
+            <p class="error" *ngIf="submitted && this.form.controls['checkArray'].errors?.required">
+              Checkbox is required, select atleast one value.
+            </p>
+            <input type="submit" value="Submit">
+          </form>
+
+          <!--ReCaptcha-->
+          <div class="text-center col-12">
+            <form [formGroup]="reactiveForm">
+              <re-captcha class="text-center col-12" formControlName="recaptchaReactive"
+                (resolved)="resolved($event)" siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU"></re-captcha>
+            </form>
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+              <div *ngif="submitted && f.recaptchaReactive.errors.required">Veuillez cocher la case Recaptcha</div>
+            </div>
+          </div>
+          <!--Button-->
+          <div class="text-center col-12">
+            <button class="btn btn-primary mr-1" [disabled]="reactiveForm.invalid">Envoyer</button> <!---->
+            <button class="btn btn-secondary" type="reset" (click)="onReset()">Annuler</button>
+          </div>
+
+        </div>
+        
+      </form>
+    </div>
+  </div>
+  <a routerLink="">RETOUR </a>
+  
+  <label for=""><input type="checkbox">Bribes / facilitations payment</label><br>
+  <br><br>
+
